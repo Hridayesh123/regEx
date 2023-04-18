@@ -8,7 +8,7 @@ export function sanitizeData(content) {
   });
   //console.log(content ,"num");
 
-  content = content.replace(/^NL(\d{2})([A-Z]{4})(\d{10})$/g,function (match, p1, p2, p3) {     //bank
+  content = content.replace(/^NL(\d{2})([A-Z]{4})(\d{10})/g,function (match, p1, p2, p3) {     //bank
       
       const n1 = "x".repeat(p1.length);
       const n2 = "x".repeat(p2.length);
@@ -24,10 +24,10 @@ export function sanitizeData(content) {
   });
   // console.log(content ,"postal");
 
-  content = content.replace(/([^@\s]+)@([^@\s]+\.)+(com)$/g,function (match, p1, p2, p3) {     //email
+  content = content.replace(/([^@\s]+)@([^@\s]+\.)+(com|org|net)(\.[a-zA-Z]{2})/g,function (match, p1, p2, p3, p4) {     //email
      
       p1 = "x".repeat(p1.length);
-      return p1 + "@" + p2 + p3;
+      return p1 + "@" + p2 + p3 + p4;
     }
   );
 
@@ -52,5 +52,5 @@ export function sanitizeData(content) {
 }
 
 sanitizeData(
-  "number is +31 6 20 87 45 18 . address is Oegstgeest....Achtkarspelen............almelo. postal is 5042PY. email is hridayez3@gmail.com"
+  "number is +31 6 20 87 45 18 . address is Oegstgeest....Achtkarspelen............almelo. postal is 5042PY. email is hridayez3@gmail.org.np"
 );
